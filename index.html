@@ -13,171 +13,25 @@
 <body>
     Enter text: <input type="text" id="inputBox" minlength="4" onkeyup="checkInput()" pattern="[a-zA-Z0-9~!@#$%&*()_+]"><br><br>
     <table >
-        <tr><td><img id="lowerAlpha" src="blob/main/images/redtick.jpg" height="20" width="20"></td><td><label id="" style="color:black;">Lower case letter</label></td></tr>
+        <tr><td><img id="lowerAlpha" src="C:\Users\Vijay\Documents\Testing Course\Self learning\images\redtick.jpg" height="20" width="20"></td><td><label id="" style="color:black;">Lower case letter</label></td></tr>
         
-        <tr><td><img id="upperAlpha" src="images/redtick.jpg" height="20" width="20"></td><td><label style="color:black;">Upper case letter </label> </td></tr>
+        <tr><td><img id="upperAlpha" src="C:\Users\Vijay\Documents\Testing Course\Self learning\images\redtick.jpg" height="20" width="20"></td><td><label style="color:black;">Upper case letter </label> </td></tr>
         
-        <tr><td><img id="digits" src="images/redtick.jpg" height="20" width="20"></td><td><label  id="" style="color:black;">Digits</label></td></tr>
+        <tr><td><img id="digits" src="C:\Users\Vijay\Documents\Testing Course\Self learning\images\redtick.jpg" height="20" width="20"></td><td><label  id="" style="color:black;">Digits</label></td></tr>
         
-        <tr><td><img id="specialChars"src="images/redtick.jpg" height="20" width="20"></td><td><label  id= "" style="color:black;">Special Characters </label> </td></tr>
+        <tr><td><img id="specialChars"src="C:\Users\Vijay\Documents\Testing Course\Self learning\images\redtick.jpg" height="20" width="20"></td><td><label  id= "" style="color:black;">Special Characters </label> </td></tr>
         
-        <tr><td><img id="minLength" src="images/redtick.jpg" height="20" width="20"></td><td><label id="" style="color:black;">Minimum Length </label> </td></tr>
+        <tr><td><img id="minLength" src="C:\Users\Vijay\Documents\Testing Course\Self learning\images\redtick.jpg" height="20" width="20"></td><td><label id="" style="color:black;">Minimum Length </label> </td></tr>
         
-        <tr><td><img id="wrongip" src="images/redtick.jpg" height="20" width="20"></td><td><label id="" style="color:black;"> input valid </label> </td></tr>
+        <tr><td><img id="wrongip" src="C:\Users\Vijay\Documents\Testing Course\Self learning\images\redtick.jpg" height="20" width="20"></td><td><label id="" style="color:black;"> input valid </label> </td></tr>
     </table>
+    <div>
+        <progress id="progresBarID" value="0" max="100" style="color: green; background-color: white;"></progress>
+        </div>
+
 </body>
-<script type="text/javascript">
-    let tempData = "";
-    let tempLength;
-
-    function basePattern(requiredPattern) {
-        let returnValue = "";
-        switch (requiredPattern) {
-            case "lowerAlphabets": returnValue = /[a-z]/;
-                break;
-            case "upperAlphabets": returnValue = /[A-Z]/;
-                break;
-            case "digits": returnValue = /[0-9]/;
-                break;
-            case "specialCharacters": returnValue = /[~!@#$%^&*()_+]/;
-                break;
-            case "wrongInput" : returnValue=/[^a-zA-Z0-9~!@#$%&*()_+]/;
-                break;
-            default:
-                break;
-        }
-        return returnValue;
-
-    }
-
-    function checkInput() {
-        let inputValue = document.getElementById("inputBox").value;
-
-        if (inputValue.length < tempLength) {
-            //console.log("character deleted");
-            if (inputValue.length - tempLength < 0) {
-                validateFullString(inputValue);
-            }
-        }
-        else {
-            let lastChar = inputValue.charAt(inputValue.length - 1);
-            //console.log(lastChar);
-            let loweralphaPattern = basePattern("lowerAlphabets");
-            let upperalphaPattern = basePattern("upperAlphabets");
-            let numPattern = basePattern("digits");
-            let specialCharPattern = basePattern("specialCharacters");
-
-            //Validate the minimum length
-            if (inputValue.length >= 4) {
-                changeColor("minLength");
-            }
-
-            //Validate the lower case letters
-            if (lastChar.match(loweralphaPattern) != null) {
-                changeColor("lowerAlpha");
-            }
-            //Validate the upper case letters
-
-            else if (lastChar.match(upperalphaPattern) != null) {
-                changeColor("upperAlpha");
-            }
-
-            //console.log(inputValue.match(numPattern));
-            else if (lastChar.match(numPattern) != null) {
-                changeColor("digits");
-            }
-            else if (lastChar.match(specialCharPattern) != null) {
-                changeColor("specialChars");
-
-            }
-            else{
-                changeColor("wrongip");
-            }
-
-        }
-    }
-
-    //Change color of the matched criteria
-    function changeColor(fieldValue) {
-        //document.getElementById(fieldValue).style.color = "green";
-        document.getElementById(fieldValue).src="images/greentick.jpg";
-        tempData = document.getElementById("inputBox").value;
-        tempLength = tempData.length;
-        //console.log(tempData);
-        //console.log(tempLength);
-
-    }
-
-    //Change color of the criteria to default color
-    function revertBackColor(fieldValue) {
-        document.getElementById(fieldValue).src="images/redtick.jpg";
-        tempData = document.getElementById("inputBox").value;
-        tempLength = tempData.length;
-        //console.log(tempData);
-        //console.log(tempLength);
-
-    }
-
-
-
-    function validateFullString(inputValue) {
-        let loweralphaPattern = basePattern("lowerAlphabets");
-        let upperalphaPattern = basePattern("upperAlphabets");
-        let numPattern = basePattern("digits");
-        let specialCharPattern = basePattern("specialCharacters");
-        let wrongInputPattern=basePattern("wrongInput");
-
-
-        //Change color of the Minimum length label
-        if (inputValue.length >= 4) {
-                changeColor("minLength");
-            }
-            else
-            {
-                revertBackColor("minLength");
-            }
-        
-        //Validate the lower case letters
-        if (inputValue.match(loweralphaPattern) != null) {
-            changeColor("lowerAlpha");
-        }
-        else {
-            revertBackColor("lowerAlpha");
-        }
-
-        //Validate the upper case letters
-        if (inputValue.match(upperalphaPattern) != null) {
-            changeColor("upperAlpha");
-        }
-        else {
-            revertBackColor("upperAlpha");
-        }
-
-        //Validate the digits
-        if (inputValue.match(numPattern) != null) {
-            changeColor("digits");
-        }
-        else {
-            revertBackColor("digits");
-        }
-
-        //Validate the special character
-        if((inputValue.match(specialCharPattern)!== null) ){
-            changeColor("specialChars");
-        }
-        else {
-            revertBackColor("specialChars");
-        }
-
-        //Validate for invalid inputs
-        if((inputValue.match(wrongInputPattern)!== null) ){
-            changeColor("wrongip");
-        }
-        else {
-            revertBackColor("wrongip");
-        }
-
-    }
+<script src="inputValidationLogic.js">
+    
 
 </script>
 
